@@ -7,5 +7,16 @@
 <body>
 <h1>It works</h1>
 <h2>My name is {{ name }}</h2>
+<form method="get" action="/create">
+    <input type="text" name="name">
+    <input type="number" name="age">
+    <button>Submit</button>
+</form>
+{% for person in people %}
+    <ul>
+        <li>{{person.name}}, {{person.age}}</li>
+    </ul>
+
+{% endfor %}
 </body>
 </html>
