@@ -1,18 +1,9 @@
-from django.shortcuts import render, redirect
-from models import NewApp
+from django.shortcuts import render
 
 
 def index(req):
-    return render(req, 'index.html')
+    context = {
+        'name': 'Doncho'
+    }
+    return render(req, 'index.html', context)
 
-def apps(req):
-    pass
-
-
-def create_app(req):
-    NewApp(
-        name=input(),
-        price=input(),
-        release_date=input()
-    ).save()
-    return redirect('')
