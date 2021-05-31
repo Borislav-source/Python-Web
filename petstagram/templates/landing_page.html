@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<h1>This is the landing page!</h1>
+<form>
+    Username:
+    <input type="text" name="Username"><br>
+    Age:
+    <input type="number" name="age">
+    {% for user in people %}
+    <li>{{user.username}} : {{user.age}}</li>
+    {% endfor %}
+</form>
+</body>
+</html>
