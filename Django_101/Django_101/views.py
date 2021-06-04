@@ -35,3 +35,7 @@ def delete_event(request, pk):
     event = Person.objects.get(pk=pk)
     event.delete()
     return redirect('/')
+
+
+def sign_in(request):
+    return render(request, 'signin.html')
