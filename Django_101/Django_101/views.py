@@ -21,11 +21,17 @@ def index(req):
 @csrf_exempt
 def update(request):
     # print('Inside update function')
-    if request.method=='POST':
+    if request.method == 'POST':
         # print("Inside post block")
-        name_data=request.POST['name']
-        age_data=request.POST['age']
-        x=Person(name=name_data,
-        age=age_data)
+        name_data = request.POST['name']
+        age_data = request.POST['age']
+        x = Person(name=name_data,
+                   age=age_data)
         x.save()
+    return redirect('/')
+
+
+def delete_event(request, pk):
+    event = Person.objects.get(pk=pk)
+    event.delete()
     return redirect('/')

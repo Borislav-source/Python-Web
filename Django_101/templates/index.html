@@ -16,8 +16,11 @@
 {% for person in people %}
     <ul>
         <li>{{person.name}}, {{person.age}}</li>
+        <form method="post" action="/delete_event/{{ person.id }}">
+            <button class="danger">Delete</button>
+            {% csrf_token %}
+        </form>
     </ul>
-
 {% endfor %}
 </body>
 </html>
