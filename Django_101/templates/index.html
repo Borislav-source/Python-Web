@@ -7,16 +7,10 @@
 <body>
 <h1>Registered people</h1>
 <h2>My name is {{ name }}</h2>
-<a href="/signin/">Sign in</a>
-<form method="post" action="/update/">
-    <input type="text" name="name">
-    <input type="number" name="age">
-    <button>Submit</button>
-    {% csrf_token %}
-</form>
+<a href="/signin/">Sign up</a>
 {% for person in people %}
     <ul>
-        <li>{{person.name}}, {{person.age}}</li>
+        <li>{{person.fname}}, {{person.age}}</li>
         <form method="post" action="/delete_event/{{ person.id }}">
             <button class="danger">Delete</button>
             {% csrf_token %}

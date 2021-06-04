@@ -9,4 +9,4 @@ class Person(models.Model):
     email = models.EmailField(null=True)
 
     def __str__(self):
-        return self.fname + ' ' + self.lname
+        return self.fname
