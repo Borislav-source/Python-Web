@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-
 from Django_101.models import Person
+from .forms import MemberForm
+from django.contrib import messages
 
 
 def index(req):
@@ -17,20 +18,27 @@ def index(req):
 def update(request):
     # print('Inside update function')
     if request.method == 'POST':
-        # print("Inside post block")
-        fname_data = request.POST['fname']
-        lname_data = request.POST['lname']
-        email_data = request.POST['email']
-        password_data = request.POST['password']
-        age_data = request.POST['age']
-        x = Person(fname=fname_data,
-                   lname=lname_data,
-                   email=email_data,
-                   password=password_data,
-                   age=age_data,
-                   )
-        x.save()
-    return redirect('/')
+        form = MemberForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Congratulations! You have sign up successfully!')
+            return redirect('/')
+        else:
+            fname_data = request.POST['fname']
+            lname_data = request.POST['lname']
+            email_data = request.POST['email']
+            password_data = request.POST['password']
+            age_data = request.POST['age']
+
+            messages.success(request, 'You made a mistake in filling your form! Please try again!')
+            return render(request, 'signin.html',
+                          {
+                              'fname': fname_data,
+                              'lname': lname_data,
+                              'email': email_data,
+                              'age': age_data,
+                              'password': password_data,
+                           })
 
 
 def delete_event(request, pk):
