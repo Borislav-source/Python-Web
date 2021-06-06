@@ -1,8 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from Django_101.models import Person
-from .forms import MemberForm
+from .forms import PersonForm
 from django.contrib import messages
 
 
@@ -18,7 +17,7 @@ def index(req):
 def update(request):
     # print('Inside update function')
     if request.method == 'POST':
-        form = MemberForm(request.POST or None)
+        form = PersonForm(request.POST or None)
         if form.is_valid():
             form.save()
             messages.success(request, 'Congratulations! You have sign up successfully!')
@@ -38,7 +37,8 @@ def update(request):
                               'email': email_data,
                               'age': age_data,
                               'password': password_data,
-                           })
+                           }
+                          )
 
 
 def delete_event(request, pk):
