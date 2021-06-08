@@ -52,6 +52,13 @@
         margin: 0 auto;
         padding: 10px;
     }
+    div.button {
+      width: 200px;
+      font-size: 20px;
+      padding: 10px;
+      color: white;
+      text-align: left;
+    }
 </style>
 <body>
     <a href="{% url 'new todo' %}">Fill a new Todo</a>
@@ -61,10 +68,24 @@
         {% for todo in todos %}
         <div class="todo">
             <p>{{ todo.title }}</p>
+            <form method="post" action="{% url 'delete todo' todo.id %}">
+                <div class="button">
+                    <button type="submit">delete</button>
+                </div>
+                {% csrf_token %}
+            </form>
             <div class="description">{{ todo.description }}</div>
             {% if todo.is_done %}
+                <form method="post" action="{% url 'todo is done' todo.id %}">
+                   <button type="submit">Not done</button>
+                    {% csrf_token %}
+                </form>
                 <div class="done">DONE</div>
             {% else %}
+                <form method="post" action="{% url 'todo is done' todo.id %}">
+                   <button type="submit">Done</button>
+                    {% csrf_token %}
+                </form>
                 <div class="open">NOT DONE</div>
             {% endif %}
         </div>

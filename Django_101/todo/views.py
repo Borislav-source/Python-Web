@@ -29,3 +29,18 @@ def update_todo(request):
         instance.save()
         return redirect('/todo/')
 
+
+def is_done(request, pk):
+    instance = Todo.objects.get(pk=pk)
+    instance.is_done = not instance.is_done
+    instance.save()
+    return redirect('/todo/')
+
+
+def delete_todo(request, pk):
+    if request.method == 'POST':
+        todo = Todo.objects.get(pk=pk)
+        todo.delete()
+    return redirect('/todo/')
+
+
