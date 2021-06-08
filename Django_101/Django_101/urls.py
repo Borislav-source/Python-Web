@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from Django_101.views import index, delete_event, update, sign_in
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('update/', update),
-    path('todo/', include('todo.urls')),
     path('delete_event/<int:pk>', delete_event),
+    path('todo/', include('todo.urls')),
     path('signin/', sign_in),
-
 ]
