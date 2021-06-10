@@ -2,5 +2,5 @@ from django.urls import path
 from petstagram.common import views
 
 urlpatterns = [
-    path('', views.landing_page)
+    path('', views.landing_page, name='home page')
 ]
