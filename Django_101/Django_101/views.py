@@ -49,3 +49,7 @@ def delete_event(request, pk):
 
 def sign_in(request):
     return render(request, 'signin.html')
+
+
+def landing_page(request):
+    return render(request, 'landing_page.html')

@@ -6,6 +6,14 @@
         <title>Bobby is the best!</title>
     </head>
     <body>
+
+    <div class="topnav">
+        <a class="active" href="{% url 'landing page' %}">Home</a>
+        <a class="active" href="{% url 'registered people' %}">Registered People</a>
+        <a class="active" href="{% url 'list of todos' %}">Todos</a>
+        <a class="active" href="{% url 'sign in' %}">Sign up</a>
+    </div>
+
     <h1>Registered people</h1>
     <h2>My name is {{ name }}</h2>
     <a href="/signin/">Sign up</a>

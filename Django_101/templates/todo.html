@@ -61,6 +61,13 @@
     }
 </style>
 <body>
+    <div class="topnav">
+        <a class="active" href="{% url 'landing page' %}">Home</a>
+        <a class="active" href="{% url 'registered people' %}">Registered People</a>
+        <a class="active" href="{% url 'list of todos' %}">Todos</a>
+        <a class="active" href="{% url 'sign in' %}">Sign up</a>
+    </div>
+
     <a href="{% url 'new todo' %}">Fill a new Todo</a>
     <h1>My Todo List</h1>
     {% if todos %}

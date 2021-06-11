@@ -6,6 +6,13 @@
 </head>
 <body>
 
+    <div class="topnav">
+        <a class="active" href="{% url 'landing page' %}">Home</a>
+        <a class="active" href="{% url 'registered people' %}">Registered People</a>
+        <a class="active" href="{% url 'list of todos' %}">Todos</a>
+        <a class="active" href="{% url 'sign in' %}">Sign up</a>
+    </div>
+
     <form method="post" action="{% url 'update todo' %}">
         {{todo_form}}
         <button type="submit">Submit</button>

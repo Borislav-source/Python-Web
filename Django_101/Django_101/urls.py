@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Django_101.views import index, delete_event, update, sign_in
-
+from Django_101.views import index, delete_event, update, sign_in, landing_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', landing_page, name='landing page'),
+    path('registred-people/', index, name='registered people'),
     path('update/', update),
     path('delete_event/<int:pk>', delete_event),
     path('todo/', include('todo.urls')),
-    path('signin/', sign_in),
+    path('signin/', sign_in, name='sign in'),
 ]

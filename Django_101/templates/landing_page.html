@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is my site</title>
+        <style>
+        body {
+          background-image: url('https://adoption.azureedge.net/wp-content/custom-backgrounds-gallery/user-submitted-background-71.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="{% url 'landing page' %}">Home</a>
+        <a class="active" href="{% url 'registered people' %}">Registered People</a>
+        <a class="active" href="{% url 'list of todos' %}">Todos</a>
+        <a class="active" href="{% url 'sign in' %}">Sign up</a>
+    </div>
+    <h1 >
+        <center>
+            Hello there, what a perfect day, isn't it?
+        </center>
+    </h1>
+
+</body>
+</html>
