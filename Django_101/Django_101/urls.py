@@ -25,4 +25,5 @@ urlpatterns = [
     path('delete_event/<int:pk>', delete_event),
     path('todo/', include('todo.urls')),
     path('signin/', sign_in, name='sign in'),
+    path('forms/', include('Forms_exercise.urls')),
 ]
