@@ -35,7 +35,8 @@ def create_new_todo(request):
             description = form.cleaned_data['description']
             todo = TodoModel(title=title, description=description)
             todo.save()
-        return redirect('forms todo ex')
+            return redirect('forms todo ex')
+        return render(request, 'todo_app/create.html', {'form': form})
 
     else:
         context = {

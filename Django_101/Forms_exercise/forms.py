@@ -56,10 +56,18 @@ class UserFormModel(forms.Form):
     )
 
 
+def title_validator(value):
+    if '.' in value:
+        raise forms.ValidationError('\'.\' is present in title')
+
+
 class TodoForm(forms.Form):
     title = forms.CharField(
         label='title',
         max_length=20,
+        validators=(
+            title_validator,
+        ),
     )
     description = forms.CharField(
         widget=forms.Textarea()

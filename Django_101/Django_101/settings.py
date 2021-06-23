@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Django_101',
     'todo',
-    'Forms_exercise'
+    'Forms_exercise',
+    'ModelForms',
 ]
 
 MIDDLEWARE = [
