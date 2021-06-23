@@ -31,8 +31,8 @@ def create_new_todo(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
         if form.is_valid():
-            title = request.POST['title']
-            description = request.POST['description']
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
             todo = TodoModel(title=title, description=description)
             todo.save()
         return redirect('forms todo ex')
@@ -47,10 +47,18 @@ def create_new_todo(request):
 def update_todo(request, pk):
     todo = TodoModel.objects.get(pk=pk)
     if request.method == 'POST':
-        todo.title = request.POST['title']
-        todo.description = request.POST['description']
-        todo.save()
-        return redirect('forms todo ex')
+        form = TodoForm(request.POST, initial=todo)
+        if form.is_valid():
+            todo.title = form.cleaned_data['title']
+            todo.description = form.cleaned_data['description']
+            todo.save()
+            return redirect('forms todo ex')
+        context = {
+            'title': todo.title,
+            'description': todo.description,
+            'todo': todo
+        }
+        return render(request, 'todo_app/edit.html', context)
     else:
         context = {
             'title': todo.title,

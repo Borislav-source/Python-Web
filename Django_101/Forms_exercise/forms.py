@@ -16,6 +16,11 @@ def password_validator(value):
         raise forms.ValidationError('Enter a valid password')
 
 
+def bot_catcher_validator(value):
+    if value:
+        raise forms.ValidationError('This form was created by a bot')
+
+
 class UserFormModel(forms.Form):
     name = forms.CharField(
         min_length=6,
@@ -41,6 +46,13 @@ class UserFormModel(forms.Form):
     )
     Text = forms.CharField(
         widget=forms.Textarea
+    )
+    bot_catcher = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput,
+        validators=[
+            bot_catcher_validator,
+        ]
     )
 
 
