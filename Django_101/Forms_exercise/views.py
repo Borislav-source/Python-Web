@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 from Forms_exercise.forms import UserFormModel, TodoForm
 from Forms_exercise.models import TodoModel
 
@@ -18,7 +17,7 @@ def index(request):
         context = {
             'form': UserFormModel()
         }
-        return render(request, 'todo_app/create.html', context)
+        return render(request, 'todo_app/login-file.html', context)
 
 
 def todo_forms_exercise(request):
