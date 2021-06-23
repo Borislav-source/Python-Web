@@ -21,10 +21,10 @@ def index(request):
 
 
 def todo_forms_exercise(request):
-        context = {
-            'todos': TodoModel.objects.all(),
-        }
-        return render(request, 'todo_app/index.html', context)
+    context = {
+        'todos': TodoModel.objects.all(),
+    }
+    return render(request, 'todo_app/index.html', context)
 
 
 def create_new_todo(request):
@@ -35,10 +35,32 @@ def create_new_todo(request):
             description = request.POST['description']
             todo = TodoModel(title=title, description=description)
             todo.save()
-        return redirect('create new todo')
+        return redirect('forms todo ex')
 
     else:
         context = {
             'form': TodoForm()
         }
         return render(request, 'todo_app/create.html', context)
+
+
+def update_todo(request, pk):
+    todo = TodoModel.objects.get(pk=pk)
+    if request.method == 'POST':
+        todo.title = request.POST['title']
+        todo.description = request.POST['description']
+        todo.save()
+        return redirect('forms todo ex')
+    else:
+        context = {
+            'title': todo.title,
+            'description': todo.description,
+            'todo': todo
+        }
+        return render(request, 'todo_app/edit.html', context)
+
+
+def delete_todo(request, pk):
+    todo = TodoModel.objects.get(pk=pk)
+    todo.delete()
+    return redirect('forms todo ex')

@@ -7,11 +7,12 @@
 <body>
 <h1>Fill out the form!</h1>
 <div class="container">
-    <form method="post">
+    <form method="post" action="{% url 'update todo forms ex' todo.id %}">
         {% csrf_token %}
-        {{ todos.as_p }}
+        <input type="text" name="title" value="{{ title }}">
+        <input type="text" name="description" value="{{ description }}">
         <input type="submit" class="btn btn-primary" value='Submit'>
-        <a class="btn" href="{% url 'index' %}">Return</a>
+        <a class="btn" href="{% url 'forms todo ex' %}">Return</a>
     </form>
 </div>
 </body>
