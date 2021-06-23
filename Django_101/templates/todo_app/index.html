@@ -18,11 +18,11 @@
                 <a class="btn btn-primary" href='delete/{{ todo.id }}'>Delete</a>
             </div>
         {% endfor %}
-        <a class="btn btn-primary" href="{% url 'create_todo' %}">Create</a>
+        <a class="btn btn-primary" href="{% url 'create new todo' %}">Create</a>
     </div>
 {% else %}
     <h2>No TODOs</h2>
-    <h2>Go to <a href={% url "create_todo" %}>/createTodo</a> to create a new TODO</h2>
+    <h2>Go to <a href={% url "create new todo" %}>/createTodo</a> to create a new TODO</h2>
 {% endif %}
 </body>
 </html>

@@ -20,9 +20,6 @@ def fill(request):
 
 def update_todo(request):
     if request.method == 'POST':
-        # form = TodoForm(request.POST or None)
-        # if form.is_valid():
-        #     form.save()
         title = request.POST['title']
         description = request.POST['description']
         instance = Todo(title=title, description=description)

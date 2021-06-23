@@ -15,3 +15,10 @@ class UserFormModel(forms.Form):
     Text = forms.CharField(
         widget=forms.Textarea
     )
+
+
+class TodoForm(forms.Form):
+    title = forms.CharField()
+    description = forms.CharField(
+        widget=forms.Textarea()
+    )
