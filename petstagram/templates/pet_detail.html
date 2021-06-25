@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'all pets list' %}">All Pet Photos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create a new pet' %}">Add Pet Photo</a>
+                </li>
                <li class="nav-item">
                   <a class="nav-link" href="#">Login</a>
                </li>
@@ -32,7 +35,7 @@
                   <a class="nav-link" href="#">Sign Up</a>
                </li>
             </ul>
-        </div>
+         </div>
     </nav>
     <div class="container">
         <div class="d-flex">
@@ -47,10 +50,36 @@
                 </div>
                 <p class="mt-2">Description: {{ pet.description }}</p>
 				<a href="{% url 'new like' pet.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                <a href="{% url 'edit pet info' pet.id %}" class="btn btn-success">Edit</a>
+                <a href="{% url 'delete a pet' pet.id %}" class="btn btn-danger">Delete</a>
+
                 <p class="mt-2">Likes: {{ pet.like_set.count }}</p>
             </div>
         </div>
     </div>
+    <div class="d-block" style="background-color: #f1e3e3; padding:2%">
+        {% if comments %}
+    {% for comment in comments %}
+    <div class="box">
+        <h5><em>{{ comment.text }}</em></h5>
+        <hr>
+    </div>
+            {% endfor %}
+    {% else %}
+    <div class="box">
+        <h3>There are no comments for this pet. </h3>
+    </div>
+    {% endif %}
+    <div class="box">
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form }}
+            <button class="btn btn-primary mt-2" type="submit">Add comment</button>
+        </form>
+    </div>
+</div>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
