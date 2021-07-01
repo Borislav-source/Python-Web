@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load capitalise_filter %}
 
-</body>
-</html>
+<div class="card m-3" style="width: 18rem;">
+            <img class="card-img-top" src="{{ python.image }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ python.name | capitalize}}</h5>
+                <p class="card-text">{{ python.description | capitalize }}</p>
+            </div>
+        </div>
