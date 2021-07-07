@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <h1 class="text-center">All Pythons</h1>
     <div class="d-flex p-3">
@@ -9,6 +10,7 @@
     <div class="card-footer navbar-dark bg-dark footer fixed-bottom text-center">
       <small class="text-light text-center">Templates Advanced Exercise @SoftUni</small>
     </div>
+    <img src="{% static './BOBY.JPG' %}" alt="">
 {% endblock %}
 
 </body>
