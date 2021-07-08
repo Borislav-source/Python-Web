@@ -30,9 +30,9 @@ class CreatePetForm(forms.ModelForm):
             }
         )),
 
-    image_url = forms.URLField(
+    image = forms.ImageField(
         required=True,
-        widget=forms.TextInput(
+        widget=forms.FileInput(
             attrs={
                 'class': 'form-control'
             }
@@ -48,4 +48,4 @@ class CreatePetForm(forms.ModelForm):
 
     class Meta:
         model = Pet
-        fields = ('type', 'name', 'age', 'description', 'image_url')
+        fields = ('type', 'name', 'age', 'description', 'image')

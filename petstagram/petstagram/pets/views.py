@@ -4,6 +4,7 @@ from common.forms import CommentForm
 from petstagram.common.models import Comment
 from pets.forms import CreatePetForm
 from petstagram.pets.models import Pet, Like
+from django_cleanup.signals import cleanup_pre_delete
 
 
 def pet_all(request):
@@ -65,7 +66,7 @@ def create(request):
         }
         return render(request, 'pet_create.html', context)
 
-    form = CreatePetForm(request.POST)
+    form = CreatePetForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
         return redirect('all pets list')
@@ -75,6 +76,7 @@ def create(request):
     }
     return render(request, 'pet_create.html', context)
 
+
 def edit(request, pk):
     pet = Pet.objects.get(pk=pk)
     if request.method == 'GET':
@@ -82,7 +84,7 @@ def edit(request, pk):
             'edit_form': CreatePetForm(instance=pet)
         }
         return render(request, 'pet_edit.html', context)
-    form = CreatePetForm(request.POST, instance=pet)
+    form = CreatePetForm(request.POST, request.FILES, instance=pet)
     if form.is_valid():
         form.save()
         return redirect('pet details', pet.id)
