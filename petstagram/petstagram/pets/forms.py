@@ -3,7 +3,7 @@ from petstagram.pets.models import Pet
 
 
 class CreatePetForm(forms.ModelForm):
-    type= forms.ChoiceField(
+    type = forms.ChoiceField(
         choices=[('dog', 'dog'),
                  ('cat', 'cat'),
                  ('parrot', 'parrot')
@@ -13,7 +13,7 @@ class CreatePetForm(forms.ModelForm):
             attrs={'class': 'form-control'}
         )),
 
-    name= forms.CharField(
+    name = forms.CharField(
         required=True,
         widget=forms.TextInput(
             attrs={
