@@ -1,4 +1,10 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
+from .decorators import authorised_users_only
 from .forms import PythonCreateForm
 from .models import Python
 from django_cleanup.signals import cleanup_pre_delete
@@ -9,6 +15,20 @@ def index(req):
     return render(req, 'index.html', {'pythons': pythons})
 
 
+def sign_in(request):
+    user = authenticate(username='bogdan', password='yolo1234')
+    # user = authenticate(username='bobo', password='12345qwe')
+    if user:
+        login(request, user)
+    return redirect('index')
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('index')
+
+
+@authorised_users_only(['User'])
 def create(req):
     if req.method == 'GET':
         form = PythonCreateForm()
