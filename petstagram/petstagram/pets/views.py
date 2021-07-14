@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from common.forms import CommentForm
+from pets.decorators import allowed_users
 from petstagram.common.models import Comment
 from pets.forms import CreatePetForm
 from petstagram.pets.models import Pet, Like
@@ -59,6 +60,7 @@ def like(request, pk):
     return redirect('pet details', pet.id)
 
 
+@allowed_users(['Management'])
 def create(request):
     if request.method == 'GET':
         context = {
@@ -77,6 +79,7 @@ def create(request):
     return render(request, 'pet_create.html', context)
 
 
+@allowed_users(['Management'])
 def edit(request, pk):
     pet = Pet.objects.get(pk=pk)
     if request.method == 'GET':
@@ -94,6 +97,7 @@ def edit(request, pk):
     return render(request, 'pet_edit.html', context)
 
 
+@allowed_users(['Management'])
 def delete(request, pk):
     pet = Pet.objects.get(pk=pk)
     if request.method == 'GET':

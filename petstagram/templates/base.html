@@ -23,14 +23,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'create a new pet' %}">Add Pet Photo</a>
                 </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Login</a>
-               </li>
+                {% if request.user.is_authenticated %}
+                   <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                   </li>
+                {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Login</a>
+                   </li>
+                {% endif %}
                <li class="nav-item">
                   <a class="nav-link" href="#">Sign Up</a>
                </li>
             </ul>
          </div>
+          <div>
+              {% if request.user.is_authenticated %}
+                  Welcome {{ request.user.username }}
+              {% endif %}
+          </div>
       </nav>
    {% block content %}
 
