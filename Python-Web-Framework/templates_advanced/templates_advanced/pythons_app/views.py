@@ -15,19 +15,6 @@ def index(req):
     return render(req, 'index.html', {'pythons': pythons})
 
 
-def sign_in(request):
-    user = authenticate(username='bogdan', password='yolo1234')
-    # user = authenticate(username='bobo', password='12345qwe')
-    if user:
-        login(request, user)
-    return redirect('index')
-
-
-def sign_out(request):
-    logout(request)
-    return redirect('index')
-
-
 @authorised_users_only(['User'])
 def create(req):
     if req.method == 'GET':

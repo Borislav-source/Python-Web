@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'templates_advanced.pythons_auth',
     'templates_advanced.pythons_app',
     'django_cleanup.apps.CleanupConfig',
 ]
