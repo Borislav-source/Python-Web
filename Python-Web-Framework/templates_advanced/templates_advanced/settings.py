@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'templates_advanced.pythons_auth',
     'templates_advanced.pythons_app',
     'django_cleanup.apps.CleanupConfig',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
