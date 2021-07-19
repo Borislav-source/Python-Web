@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin, Group
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import PermissionsMixin, Group, User
 from django.db import models
 
 
@@ -43,3 +44,6 @@ class PythonsUser(AbstractBaseUser, PermissionsMixin):
 
     objects = PythonsUserManager()
 
+
+UserCreationForm
+User
