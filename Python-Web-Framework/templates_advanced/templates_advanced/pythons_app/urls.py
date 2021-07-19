@@ -8,4 +8,5 @@ urlpatterns = [
     path('create/', views.create, name="create"),
     path('delete/<int:pk>', views.delete, name='delete'),
     path('auth/', include('templates_advanced.pythons_auth.urls')),
+    path('profiles/', include('templates_advanced.profiles.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
