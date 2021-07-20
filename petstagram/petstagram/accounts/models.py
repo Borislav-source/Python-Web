@@ -1,4 +1,3 @@
-from datetime import time
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, User
 from django.db import models
@@ -16,7 +15,7 @@ class PetstagramUser(AbstractBaseUser, PermissionsMixin):
     )
 
     date_joined = models.DateTimeField(
-        auto_now_add=time,
+        auto_now_add=True,
     )
 
     objects = PetstagramUserManager()

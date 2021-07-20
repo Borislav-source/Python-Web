@@ -8,7 +8,7 @@ UserModel = get_user_model()
 
 
 @receiver(post_save, sender=UserModel)
-def create_profile_user(signal, instance, created, **kwargs):
+def create_profile_user(sender, instance, created, **kwargs):
     if created:
         profile = UserProfile(
             user=instance,
