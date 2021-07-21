@@ -2,7 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, User
 from django.db import models
 
-from accounts.managers import PetstagramUserManager
+from petstagram.accounts.managers import PetstagramUserManager
 
 
 class PetstagramUser(AbstractBaseUser, PermissionsMixin):
@@ -31,7 +31,7 @@ class UserProfile(models.Model):
     )
 
     profile_picture = models.ImageField(
-        upload_to='profiles',
+        upload_to='images/profiles',
         blank=True
     )
 

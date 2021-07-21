@@ -11,11 +11,20 @@
                     <h5><u>Type:</u> {{ pet.type }}</h5>
                     <h5><u>Name:</u> {{ pet.name }}</h5>
                     <h5><u>Age:</u> {{ pet.age }}</h5>
+                    <h5><u>Owner:</u> {{ pet.user }}</h5>
                 </div>
                 <p class="mt-2">Description: {{ pet.description }}</p>
-				<a href="{% url 'new like' pet.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+            {% if not is_owner %}
+                {% if like_object %}
+				<a href="{% url 'new like' pet.id %}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                {% else %}
+                <a href="{% url 'new like' pet.id %}"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                {% endif %}
+            {% endif %}
+            {% if is_owner %}
                 <a href="{% url 'edit pet info' pet.id %}" class="btn btn-success">Edit</a>
                 <a href="{% url 'delete a pet' pet.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
 
                 <p class="mt-2">Likes: {{ pet.like_set.count }}</p>
             </div>
@@ -25,7 +34,7 @@
         {% if comments %}
     {% for comment in comments %}
     <div class="box">
-        <h5><em>{{ comment.text }}</em></h5>
+        <h5><em>{{ comment.user }}: {{ comment.text }}</em></h5>
         <hr>
     </div>
             {% endfor %}
@@ -35,11 +44,13 @@
     </div>
     {% endif %}
     <div class="box">
-        <form method="post">
+        {% if not is_owner %}
+        <form method="post" action="{% url 'comment pet' pet.id %}">
             {% csrf_token %}
             {{ comment_form }}
             <button class="btn btn-primary mt-2" type="submit">Add comment</button>
         </form>
+        {% endif %}
     </div>
 </div>
    {% endblock %}

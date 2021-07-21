@@ -1,6 +1,8 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+
+from petstagram.pets.models import Pet
 from petstagram.accounts.forms import ProfileForm, SignupForm, SigninForm
 from petstagram.accounts.models import UserProfile
 
@@ -11,10 +13,12 @@ def user_profile(request, pk):
         form = ProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile details')
+            return redirect('profile details', pk)
         return render(request, 'accounts/user_profile.html', {'form': form})
     context = {
         'form': ProfileForm(instance=user),
+        'pets': Pet.objects.filter(user_id=pk),
+        'profile': user,
     }
 
     return render(request, 'accounts/user_profile.html', context)

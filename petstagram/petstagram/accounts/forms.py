@@ -9,7 +9,7 @@ UserModel = get_user_model()
 
 class ProfileForm(forms.ModelForm):
     class Meta:
-        mode = UserProfile
+        model = UserProfile
         fields = ('profile_picture',)
 
 

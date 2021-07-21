@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from common.forms import CommentForm
@@ -15,51 +16,44 @@ def pet_all(request):
     return render(request, 'pet_list.html', context)
 
 
+@login_required
 def pet_detail(request, pk):
-    if request.method == 'GET':
-        pet_comments = []
-        comments = Comment.objects.all()
-        for comment in comments:
-            if comment.pet_id == pk:
-                pet_comments.append(comment)
-        context = {
-            'pet': Pet.objects.get(pk=pk),
-            'comments': pet_comments,
-            'comment_form': CommentForm(),
-        }
+    pet = Pet.objects.get(pk=pk)
+    context = {
+        'pet': pet,
+        'is_owner': pet.user == request.user,
+        'like_object': pet.like_set.filter(user_id=request.user.id),
+        'comments': pet.comment_set.all(),
+        'comment_form': CommentForm()
+    }
+    return render(request, 'pet_detail.html', context)
 
-        return render(request, 'pet_detail.html', context)
+
+def comment_pet(request, pk):
     form = CommentForm(request.POST)
     if form.is_valid():
-        text = form.cleaned_data['comment']
-        form = Comment(text=text, pet_id=pk)
-        form.save()
-        pet_comments = []
-        comments = Comment.objects.all()
-        for comment in comments:
-            if comment.pet_id == pk:
-                pet_comments.append(comment)
-        context = {
-            'pet': Pet.objects.get(pk=pk),
-            'comments': pet_comments,
-            'comment_form': CommentForm(),
-        }
-
-        return render(request, 'pet_detail.html', context)
+        comment = form.save(commit=False)
+        comment.pet = Pet.objects.get(pk=pk)
+        comment.user = request.user
+        comment.save()
+    return redirect('pet details', pk)
 
 
 def like(request, pk):
     pet = Pet.objects.get(pk=pk)
-    new_like = Like(
-        pet=pet,
-    )
-    new_like.save()
-    context = {
-        'likes': Like.objects.all()
-    }
+    like_object = pet.like_set.filter(user_id=request.user.id).first()
+    if not like_object:
+        new_like = Like(
+            pet=pet,
+            user=request.user,
+        )
+        new_like.save()
+    else:
+        like_object.delete()
     return redirect('pet details', pet.id)
 
 
+@login_required
 @allowed_users(['Management'])
 def create(request):
     if request.method == 'GET':
@@ -70,7 +64,9 @@ def create(request):
 
     form = CreatePetForm(request.POST, request.FILES)
     if form.is_valid():
-        form.save()
+        pet = form.save(commit=False)
+        pet.user = request.user
+        pet.save()
         return redirect('all pets list')
 
     context = {

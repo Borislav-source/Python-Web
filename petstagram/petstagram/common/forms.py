@@ -2,8 +2,8 @@ from django import forms
 from petstagram.common.models import Comment
 
 
-class CommentForm(forms.Form):
-    comment = forms.CharField(
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={
@@ -14,4 +14,4 @@ class CommentForm(forms.Form):
 
     class Meta:
         model = Comment
-        fields = ('comment',)
+        fields = ('text',)

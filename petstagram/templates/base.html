@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -40,7 +41,8 @@
          </div>
           <div>
               {% if request.user.is_authenticated %}
-                  Welcome {{ request.user.username }}
+                  Welcome <a href="{% url 'profile details' request.user.id %}">{{ request.user.email }}</a>
+                  <img class="rounded-circle mb-3" src="{{ request.user.userprofile.profile_picture.url }}" alt="Generic placeholder image" width="30" height="30">
               {% endif %}
           </div>
       </nav>

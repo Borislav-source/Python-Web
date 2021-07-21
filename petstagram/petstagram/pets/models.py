@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.deletion import CASCADE
+
+UserModel = get_user_model()
 
 
 class Pet(models.Model):
@@ -23,7 +26,18 @@ class Pet(models.Model):
     age = models.PositiveIntegerField()
     description = models.TextField()
     image = models.ImageField(upload_to='images/pets')
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
 
 
 class Like(models.Model):
-    pet = models.ForeignKey(Pet, on_delete=CASCADE)
+    pet = models.ForeignKey(
+        Pet,
+        on_delete=CASCADE
+    )
+    user = models.OneToOneField(
+        UserModel,
+        on_delete=models.CASCADE
+    )
