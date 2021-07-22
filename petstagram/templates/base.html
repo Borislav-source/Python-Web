@@ -42,7 +42,11 @@
           <div>
               {% if request.user.is_authenticated %}
                   Welcome <a href="{% url 'profile details' request.user.id %}">{{ request.user.email }}</a>
+                  {% if request.user.userprofile.profile_picture %}
                   <img class="rounded-circle mb-3" src="{{ request.user.userprofile.profile_picture.url }}" alt="Generic placeholder image" width="30" height="30">
+                      {% else %}
+                      <img class="rounded-circle mb-3" src="{% static 'images/Generic-person.svg.png' %}" alt="Generic placeholder image" width="30" height="30">
+                      {% endif %}
               {% endif %}
           </div>
       </nav>
