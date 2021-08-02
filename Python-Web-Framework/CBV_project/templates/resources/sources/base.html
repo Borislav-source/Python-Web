@@ -11,10 +11,10 @@
 <body>
 	<div class=" navigation-section">
 		<nav class="navigation-container container">
-			<a class="link-item" href="/">Home Page</a>
-			<a class="link-item" href="/sources">Sources</a>
-			<a class="link-item" href="/source/create">Add new Source</a>
-			<a class="link-item" href="/article/create">Add new Article</a>
+			<a class="link-item" href="{% url 'home page' %}">Home Page</a>
+			<a class="link-item" href="{% url 'sources list' %}">Sources</a>
+			<a class="link-item" href="{% url 'create source' %}">Add new Source</a>
+			<a class="link-item" href="{% url 'create article' %}">Add new Article</a>
 		</nav>
 	</div>
 

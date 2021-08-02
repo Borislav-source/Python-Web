@@ -9,14 +9,17 @@ class SourceModel(models.Model):
         max_length=200
     )
 
+    def __str__(self):
+        return self.name
+
 
 class ArticleModel(models.Model):
     title = models.CharField(
-        max_length= 100,
+        max_length=100,
     )
-    description= models.TextField()
+    description = models.TextField()
     imageUrl = models.URLField(
-        max_length = 200,
+        max_length=200,
     )
     source = models.ForeignKey(
         SourceModel,
