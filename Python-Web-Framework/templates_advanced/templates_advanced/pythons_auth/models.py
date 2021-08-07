@@ -44,6 +44,3 @@ class PythonsUser(AbstractBaseUser, PermissionsMixin):
 
     objects = PythonsUserManager()
 
-
-UserCreationForm
-User

@@ -1,6 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 
@@ -14,7 +13,7 @@ class SiteUserManager(BaseUserManager):
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.password = make_password(password)
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -35,7 +34,7 @@ class SiteUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class SiteUser(AbstractBaseUser):
+class SiteUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
         error_messages={
@@ -43,10 +42,10 @@ class SiteUser(AbstractBaseUser):
         }
     )
     is_staff = models.BooleanField(
-        default = False,
+        default=False,
     )
     date_joined = models.DateTimeField(
-        default = timezone.now
+        default=timezone.now
     )
 
     objects = SiteUserManager()

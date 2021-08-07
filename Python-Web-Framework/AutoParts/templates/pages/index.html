@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'cars' 'Car' %}">Cars</a>
+    <a href="{% url 'cars' 'Truck' %}">Trucks</a>
+    <a href="{% url 'cars' 'Motorcycle' %}">Motorcycles</a>
+{% endblock %}

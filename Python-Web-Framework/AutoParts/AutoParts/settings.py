@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'AutoParts.accounts',
     'AutoParts.common',
     'AutoParts.vehicle',
+    'AutoParts.parts',
+    'AutoParts.store',
 ]
 
 MIDDLEWARE = [
@@ -81,12 +83,8 @@ WSGI_APPLICATION = 'AutoParts.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'AutoParts',
-        'USER': 'postgres',
-        'PASSWORD': 'metal 6565',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -129,9 +127,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(
+    BASE_DIR / 'media',
+)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 AUTH_USER_MODEL = 'account_auth.SiteUser'

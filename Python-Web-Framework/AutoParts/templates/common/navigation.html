@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand navbar-light-brand-hover-color" href="#">AutoParts</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" title="Home" aria-current="page" href="{% url 'index' %}"><i
+                            class="fa fa-fw fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" title="Favorites" href="#"><i class="fa fa-fw fa-heart"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" title="Garage" href="#"><i class="fa fa-car" aria-hidden="true"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-fw fa-address-book-o"></i>Contacts</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav navbar-nav navbar-right" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-link">
+                        Hello <a href="{% url 'profile details' %}">{{ request.user }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sign out' %}">Sign out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sign in' %}">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sign up' %}">Sign up</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
